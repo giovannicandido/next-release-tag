@@ -6,7 +6,7 @@
   "license": "MIT-open-group",
   "homepage": "https://github.com/alexvingg/next-release-tag#readme",
   "scripts": {
-    "build": "pnpm clean && ncc build src/index.ts --minify --license licenses.txt",
+    "build": "npm run clean && ncc build src/index.ts --minify --license licenses.txt",
     "clean": "rimraf dist/",
     "dist": "pnpm lint && pnpm test && pnpm build",
     "lint": "eslint .",
