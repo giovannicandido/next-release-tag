@@ -11,7 +11,7 @@ export const fetchLatestReleaseTag = async () => {
       const { latestTags } = await octokit.graphql<{latestTags: any}>(
         `
           query latestTags($owner: String!, $repo: String!) {
-            repository($owner: String!, $repo: String!) {
+            repository(owner: $owner, name: $repo) {
               refs(refPrefix: "refs/tags/", first: 1, orderBy: {field: TAG_COMMIT_DATE, direction: DESC}) {
                 edges {
                   node {
