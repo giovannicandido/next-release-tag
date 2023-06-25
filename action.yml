@@ -14,7 +14,7 @@ inputs:
     required: false
     default: 'v'
   use_tag:
-    description: 'Use latest tag instead of the latest release. Util for prereleases',
+    description: 'Use latest tag instead of the latest release. Util for prereleases'
     required: false
     default: false
 
