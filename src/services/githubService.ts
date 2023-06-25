@@ -1,5 +1,6 @@
 import { getInput } from '@actions/core';
 import { context, getOctokit } from '@actions/github';
+import type { GraphQlQueryResponseData } from "@octokit/graphql";
 
 export const fetchLatestReleaseTag = async () => {
   try {
@@ -8,7 +9,7 @@ export const fetchLatestReleaseTag = async () => {
     const octokit = getOctokit(githubToken);
     const { owner, repo } = context.repo;
     if(useTagInsteadOfRelease) {
-      const response = await octokit.graphql<{latestTags: any}>(
+      const response = await octokit.graphql<GraphQlQueryResponseData>(
         `
           query latestTags($owner: String!, $repo: String!) {
             repository(owner: $owner, name: $repo) {
@@ -40,8 +41,8 @@ export const fetchLatestReleaseTag = async () => {
           repo: repo,
         }
       );
-      console.log(response)
-      return response.latestTags.name;
+           
+      return (response.refs.edges as Array<{node: {name: string}}>)[0]?.node?.name;
     } else {
       const response = await octokit.rest.repos.getLatestRelease({
         owner,
