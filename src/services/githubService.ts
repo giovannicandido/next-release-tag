@@ -8,7 +8,7 @@ export const fetchLatestReleaseTag = async () => {
     const octokit = getOctokit(githubToken);
     const { owner, repo } = context.repo;
     if(useTagInsteadOfRelease) {
-      const { latestTags } = await octokit.graphql<{latestTags: any}>(
+      const response = await octokit.graphql<{latestTags: any}>(
         `
           query latestTags($owner: String!, $repo: String!) {
             repository(owner: $owner, name: $repo) {
@@ -40,7 +40,8 @@ export const fetchLatestReleaseTag = async () => {
           repo: repo,
         }
       );
-      return latestTags.name;
+      console.log(response)
+      return response.latestTags.name;
     } else {
       const response = await octokit.rest.repos.getLatestRelease({
         owner,
