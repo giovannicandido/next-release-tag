@@ -41,7 +41,7 @@ export const fetchLatestReleaseTag = async () => {
           repo: repo,
         }
       );
-           
+      console.log(response)  
       return (response.refs.edges as Array<{node: {name: string}}>)[0]?.node?.name;
     } else {
       const response = await octokit.rest.repos.getLatestRelease({
