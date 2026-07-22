@@ -16,8 +16,8 @@ inputs:
   use_tag:
     description: 'Use latest tag instead of the latest release. Util for prereleases'
     required: false
-    default: false
+    default: 'false'
 
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
